@@ -23,27 +23,23 @@ function createBot(botName) {
     }, 60000);
   });
 
-  bot.on('kicked', (reason) => {
-    console.warn(`${bot.username} was kicked:`, reason);
-    console.log(`Reconnecting ${botName} in 15 seconds...`);
-    setTimeout(() => createBot(botName), 15000);
-  });
-
   bot.on('end', () => {
-    console.log(`${bot.username} disconnected. Reconnecting in 10 seconds...`);
-    setTimeout(() => createBot(botName), 10000);
+    console.log(`${bot.username} got disconnected. Reconnecting...`);
+    setTimeout(() => createBot(botName), 5000);
   });
 
   bot.on('error', (err) => {
-    console.error(`${botName} error:`, err);
+    console.error(`${botName} encountered an error:`, err);
+  });
+
+  bot.on('kicked', (reason) => {
+    console.log(`${bot.username} was kicked: ${reason}`);
   });
 }
 
-// إنشاء بوتين بأسماء مختلفة
 createBot('AFKBott1');
 createBot('AFKBott2');
 
-// خادم Express لإبقاء البوت نشطًا على Render
 const app = express();
 app.get('/', (req, res) => res.send('Bots are running'));
 app.listen(3000, () => console.log('Keep-alive server is running on port 3000'));
