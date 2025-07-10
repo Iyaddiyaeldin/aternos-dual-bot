@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "mineflayer": "^4.11.1"
+    "mineflayer": "^4.17.1",
+    "express": "^4.18.2"
+}
+
   },
   "scripts": {
     "start": "node index.js"
